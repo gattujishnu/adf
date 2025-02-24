@@ -1,0 +1,168 @@
+{
+	"name": "scd2o1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SCD2Cust",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "SCD2o1",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SCD2o1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "SCD2o1",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "derivedColumn3"
+				},
+				{
+					"name": "exists1"
+				},
+				{
+					"name": "alterRow1"
+				},
+				{
+					"name": "exists2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          CustomerID as integer,",
+				"          Name as string,",
+				"          Email as string,",
+				"          Phone as string,",
+				"          Address as string,",
+				"          City as string,",
+				"          State as string,",
+				"          ZipCode as string,",
+				"          LastUpdated as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source(output(",
+				"          id as integer,",
+				"          CustomerID as integer,",
+				"          Name as string,",
+				"          Email as string,",
+				"          Phone as string,",
+				"          Address as string,",
+				"          City as string,",
+				"          State as string,",
+				"          ZipCode as string,",
+				"          LastUpdated as timestamp,",
+				"          is_active as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source2",
+				"source1 derive(is_active = 1,",
+				"          hashkey = md5(Name+Email+Phone)) ~> derivedColumn1",
+				"source2 filter(is_active == true()) ~> filter1",
+				"filter1 derive(is_active = 0,",
+				"          s2_hashkey = md5(Name+Email+Phone)) ~> derivedColumn3",
+				"derivedColumn1, derivedColumn3 exists(source1@CustomerID == source2@CustomerID && hashkey == s2_hashkey,",
+				"     negate:true,",
+				"     partitionBy('hash', 1),",
+				"     broadcast: 'both')~> exists1",
+				"exists2 alterRow(updateIf(1==1)) ~> alterRow1",
+				"derivedColumn3, derivedColumn1 exists(source2@CustomerID==source1@CustomerID&&s2_hashkey!=hashkey,",
+				"     negate:false,",
+				"     broadcast: 'auto')~> exists2",
+				"exists1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id as integer,",
+				"          CustomerID as integer,",
+				"          Name as string,",
+				"          Email as string,",
+				"          Phone as string,",
+				"          Address as string,",
+				"          City as string,",
+				"          State as string,",
+				"          ZipCode as string,",
+				"          LastUpdated as timestamp,",
+				"          is_active as boolean",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 2,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id as integer,",
+				"          CustomerID as integer,",
+				"          Name as string,",
+				"          Email as string,",
+				"          Phone as string,",
+				"          Address as string,",
+				"          City as string,",
+				"          State as string,",
+				"          ZipCode as string,",
+				"          LastUpdated as timestamp,",
+				"          is_active as boolean",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     keys:['id'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          id,",
+				"          CustomerID,",
+				"          Name,",
+				"          Email,",
+				"          Phone,",
+				"          Address,",
+				"          City,",
+				"          State,",
+				"          ZipCode,",
+				"          LastUpdated,",
+				"          is_active",
+				"     )) ~> sink2"
+			]
+		}
+	}
+}

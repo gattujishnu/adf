@@ -1,0 +1,9 @@
+{
+	"name": "varunproddf",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "eb789b23-e027-49ee-a4d0-385676113d1d",
+		"tenantId": "5816f4b4-1e77-491a-95fe-8d984b48e7b2"
+	}
+}

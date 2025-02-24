@@ -1,0 +1,49 @@
+{
+	"name": "GetMetadata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureGen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "csv_data",
+				"fileSystem": "web"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "NAME",
+				"type": "String"
+			},
+			{
+				"name": "TYPE",
+				"type": "String"
+			},
+			{
+				"name": "LOCATION",
+				"type": "String"
+			},
+			{
+				"name": "RESOURCE GROUP",
+				"type": "String"
+			},
+			{
+				"name": "SUBSCRIPTION",
+				"type": "String"
+			},
+			{
+				"name": "LAST ACCESSED",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
