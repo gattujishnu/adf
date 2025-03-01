@@ -1,0 +1,46 @@
+{
+	"name": "delete_activity",
+	"properties": {
+		"activities": [
+			{
+				"name": "Delete_activity",
+				"type": "Delete",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DeleteActivity",
+						"type": "DatasetReference"
+					},
+					"logStorageSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureGen2",
+							"type": "LinkedServiceReference"
+						},
+						"path": "web/badData"
+					},
+					"enableLogging": true,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"maxConcurrentConnections": 3,
+						"recursive": true,
+						"modifiedDatetimeStart": "2025-02-28T11:00:00Z",
+						"modifiedDatetimeEnd": "2025-03-21T13:00:00Z",
+						"wildcardFileName": "*.txt",
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-03-01T06:47:03Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

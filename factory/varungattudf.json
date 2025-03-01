@@ -1,0 +1,9 @@
+{
+	"name": "varungattudf",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "6a6f8252-d807-4f5e-9790-2a443ba01c36",
+		"tenantId": "5816f4b4-1e77-491a-95fe-8d984b48e7b2"
+	}
+}
