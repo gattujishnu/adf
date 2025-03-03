@@ -62,18 +62,55 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "SELECT * FROM item().Table_Name \nWHERE LastUpdated >= '@{formatDateTime(trigger().outputs.windowStartTime, 'yyyy-MM-dd HH:mm:ss')}'\nAND LastUpdated < '@{formatDateTime(trigger().outputs.windowEndTime, 'yyyy-MM-dd HH:mm:ss')}'\n",
+										"value": "SELECT * FROM item().Table_Name \nWHERE ModifiedDate >= '@{formatDateTime(pipeline().parameters.triggerstart, 'yyyy-MM-dd HH:mm:ss')}'\nAND ModifiedDate < '@{formatDateTime(pipeline().parameters.triggerend, 'yyyy-MM-dd HH:mm:ss')}'\n",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
-								"enableStaging": false
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
 							},
 							"inputs": [
 								{
 									"referenceName": "AzureSqlTable4",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"table": {
+											"value": "@item().Table_Name",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DelimitedText2",
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@item().Table_Name",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
@@ -81,6 +118,16 @@
 				}
 			}
 		],
+		"parameters": {
+			"triggerstart": {
+				"type": "string",
+				"defaultValue": "@trigger().outputs.windowStart"
+			},
+			"triggerend": {
+				"type": "string",
+				"defaultValue": "@trigger().outputs.windowEnd"
+			}
+		},
 		"annotations": []
 	}
 }
