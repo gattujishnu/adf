@@ -126,22 +126,18 @@
 							"type": "SetVariable",
 							"dependsOn": [],
 							"policy": {
-								"secureOutput": false,
+								"secureOutput": true,
 								"secureInput": false
 							},
-							"userProperties": [],
+							"userProperties": [
+								{
+									"name": "query",
+									"value": "@concat(    'SELECT * FROM [', item().Table_Name, '] ',    'WHERE ModifiedDate >= ''', pipeline().parameters.triggerstart, ''' ',    'AND ModifiedDate < ''', pipeline().parameters.triggerend, '''' )"
+								}
+							],
 							"typeProperties": {
-								"variableName": "pipelineReturnValue",
-								"value": [
-									{
-										"key": "vaklue",
-										"value": {
-											"type": "String",
-											"content": "@concat(    'SELECT * FROM [', item().Table_Name, '] ',    'WHERE ModifiedDate >= ''', pipeline().parameters.triggerstart, ''' ',    'AND ModifiedDate < ''', pipeline().parameters.triggerend, '''' )"
-										}
-									}
-								],
-								"setSystemVariable": true
+								"variableName": "variable",
+								"value": "@concat(\n   'SELECT * FROM [', item().Table_Name, '] ',\n   'WHERE ModifiedDate >= ''', pipeline().parameters.triggerstart, ''' ',\n   'AND ModifiedDate < ''', pipeline().parameters.triggerend, ''''\n)\n"
 							}
 						}
 					]
@@ -156,6 +152,11 @@
 			"triggerend": {
 				"type": "string",
 				"defaultValue": "@trigger().outputs.windowEnd"
+			}
+		},
+		"variables": {
+			"variable": {
+				"type": "String"
 			}
 		},
 		"annotations": []
