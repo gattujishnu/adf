@@ -6,6 +6,14 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "varungattudf"
+		},
+		"trigger1_properties_pipeline_parameters_triggerstart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStart"
+		},
+		"trigger1_properties_pipeline_parameters_triggerend": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEnd"
 		}
 	},
 	"variables": {
@@ -514,7 +522,7 @@
 										"source": {
 											"type": "AzureSqlSource",
 											"sqlReaderQuery": {
-												"value": "SELECT * FROM item().Table_Name \nWHERE ModifiedDate >= '@{formatDateTime(pipeline().parameters.triggerstart, 'yyyy-MM-dd HH:mm:ss.fff')}'\nAND ModifiedDate < '@{formatDateTime(pipeline().parameters.triggerend, 'yyyy-MM-dd HH:mm:ss.fff')}'\n",
+												"value": "SELECT * FROM item().Table_Name \nWHERE ModifiedDate >= '@{pipeline().parameters.triggerstart}'\nAND ModifiedDate < '@{pipeline().parameters.triggerend}'\n",
 												"type": "Expression"
 											},
 											"queryTimeout": "02:00:00",
@@ -1174,13 +1182,16 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipeline": {
 					"pipelineReference": {
 						"referenceName": "pipeline2",
 						"type": "PipelineReference"
 					},
-					"parameters": {}
+					"parameters": {
+						"triggerstart": "[parameters('trigger1_properties_pipeline_parameters_triggerstart')]",
+						"triggerend": "[parameters('trigger1_properties_pipeline_parameters_triggerend')]"
+					}
 				},
 				"type": "TumblingWindowTrigger",
 				"typeProperties": {

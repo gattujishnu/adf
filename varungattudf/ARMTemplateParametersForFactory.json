@@ -28,6 +28,12 @@
 		},
 		"Validation_properties_typeProperties_url": {
 			"value": "https://varungattu.dfs.core.windows.net/"
+		},
+		"trigger1_properties_pipeline_parameters_triggerstart": {
+			"value": "@trigger().outputs.windowStart"
+		},
+		"trigger1_properties_pipeline_parameters_triggerend": {
+			"value": "@trigger().outputs.windowEnd"
 		}
 	}
 }
