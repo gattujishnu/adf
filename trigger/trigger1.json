@@ -2,11 +2,15 @@
 	"name": "trigger1",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipeline": {
 			"pipelineReference": {
 				"referenceName": "pipeline2",
 				"type": "PipelineReference"
+			},
+			"parameters": {
+				"triggerstart": "@trigger().outputs.windowStart",
+				"triggerend": "@trigger().outputs.windowEnd"
 			}
 		},
 		"type": "TumblingWindowTrigger",
