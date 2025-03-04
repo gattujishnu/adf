@@ -62,7 +62,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "SELECT * FROM item().Table_Name \nWHERE ModifiedDate >= '@{formatDateTime(pipeline().parameters.triggerstart, 'yyyy-MM-dd HH:mm:ss.fff')}'\nAND ModifiedDate < '@{formatDateTime(pipeline().parameters.triggerend, 'yyyy-MM-dd HH:mm:ss.fff')}'\n",
+										"value": "SELECT * FROM item().Table_Name \nWHERE ModifiedDate >= '@{formatDateTime(pipeline().parameters.triggerstart, 'yyyy-MM-ddTHH:mm:ssZ')}'\nAND ModifiedDate < '@{formatDateTime(pipeline().parameters.triggerend, 'yyyy-MM-ddTHH:mm:ssZ')}'\n",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
