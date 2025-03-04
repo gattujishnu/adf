@@ -702,7 +702,14 @@
 								{
 									"name": "Copy data1",
 									"type": "Copy",
-									"dependsOn": [],
+									"dependsOn": [
+										{
+											"activity": "Set variable1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
 									"policy": {
 										"timeout": "0.12:00:00",
 										"retry": 0,
@@ -714,9 +721,29 @@
 									"typeProperties": {
 										"source": {
 											"type": "AzureSqlSource",
-											"sqlReaderQuery": {
-												"value": "SELECT * FROM item().Table_Name \nWHERE ModifiedDate >= '@{pipeline().parameters.triggerstart}'\nAND ModifiedDate < '@{pipeline().parameters.triggerend}'\n",
-												"type": "Expression"
+											"sqlReaderStoredProcedureName": "[[dbo].[ramp]",
+											"storedProcedureParameters": {
+												"enddate": {
+													"type": "String",
+													"value": {
+														"value": "@pipeline().parameters.triggerstart",
+														"type": "Expression"
+													}
+												},
+												"startdate": {
+													"type": "String",
+													"value": {
+														"value": "@pipeline().parameters.triggerend",
+														"type": "Expression"
+													}
+												},
+												"tablename": {
+													"type": "String",
+													"value": {
+														"value": "@item().Table_Name",
+														"type": "Expression"
+													}
+												}
 											},
 											"queryTimeout": "02:00:00",
 											"partitionOption": "None"
@@ -760,12 +787,31 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"filename": {
-													"value": "@item().Table_Name",
+													"value": "@{concat(item().Table_Name, formatDateTime(convertFromUtc(pipeline().parameters.triggerstart, 'UTC'), 'yyyyMMddHHmm'), '.csv')}\n",
 													"type": "Expression"
 												}
 											}
 										}
 									]
+								},
+								{
+									"name": "Set variable1",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [
+										{
+											"name": "query",
+											"value": "@concat(    'SELECT * FROM [', item().Table_Name, '] ',    'WHERE ModifiedDate >= ''', pipeline().parameters.triggerstart, ''' ',    'AND ModifiedDate < ''', pipeline().parameters.triggerend, '''' )"
+										}
+									],
+									"typeProperties": {
+										"variableName": "variable",
+										"value": "@concat(\n   'SELECT * FROM [', item().Table_Name, '] ',\n   'WHERE ModifiedDate >= ''', pipeline().parameters.triggerstart, ''' ',\n   'AND ModifiedDate < ''', pipeline().parameters.triggerend, ''''\n)\n"
+									}
 								}
 							]
 						}
@@ -782,6 +828,11 @@
 					"triggerend": {
 						"type": "string",
 						"defaultValue": "@trigger().outputs.windowEnd"
+					}
+				},
+				"variables": {
+					"variable": {
+						"type": "String"
 					}
 				},
 				"annotations": []
@@ -1084,7 +1135,7 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": {
-							"value": "@{dataset().filename}{formatDateTime(pipeline.parameters.triggerstart, 'yyyyMMddHHmm')}.csv",
+							"value": "@dataset().filename",
 							"type": "Expression"
 						},
 						"folderPath": "customerData",

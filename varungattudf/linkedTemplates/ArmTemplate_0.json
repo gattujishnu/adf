@@ -392,7 +392,7 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": {
-							"value": "@{dataset().filename}{formatDateTime(pipeline.parameters.triggerstart, 'yyyyMMddHHmm')}.csv",
+							"value": "@dataset().filename",
 							"type": "Expression"
 						},
 						"folderPath": "customerData",
