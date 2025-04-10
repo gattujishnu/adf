@@ -5,13 +5,13 @@
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"server": "varun.database.windows.net",
-			"database": "jishnu",
+			"server": "jishnudev.database.windows.net",
+			"database": "jishnudb",
 			"encrypt": "mandatory",
 			"trustServerCertificate": false,
 			"authenticationType": "SQL",
 			"userName": "jishnu",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDQyRDFCODZDLTA1RTQtNDUzOC05MTA3LTNEMDYyMDUyMTI2MV9hNGNmMDc5Mi1kOGM5LTQyMTctYjRjNS0xYzUwZWZhMzlhZWUiDQp9"
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEI1NzdCMTM4LTUzQTktNDYzOC05MTRFLTMwNzEwMDBCNjQ4Rl85M2UwMGVhNy1lN2JjLTQwMTMtOTU4OC02N2NmZWFiZDNlMzIiDQp9"
 		}
 	}
 }
