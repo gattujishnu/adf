@@ -238,7 +238,7 @@
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2025-04-10T06:46:19Z"
+		"lastPublishTime": "2025-06-23T06:32:30Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }
