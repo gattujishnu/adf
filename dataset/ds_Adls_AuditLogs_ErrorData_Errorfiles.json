@@ -1,0 +1,24 @@
+{
+	"name": "ds_Adls_AuditLogs_ErrorData_Errorfiles",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lnk_Adls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "HumanResourcesAuditLogsErrorDataFiles",
+				"fileSystem": "varun"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

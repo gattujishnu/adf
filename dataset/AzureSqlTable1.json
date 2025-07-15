@@ -2,12 +2,24 @@
 	"name": "AzureSqlTable1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSql",
+			"referenceName": "ls_prod_mis",
 			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"table_name": {
+				"type": "string"
+			}
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": []
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": {
+				"value": "@dataset().table_name",
+				"type": "Expression"
+			}
+		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }
