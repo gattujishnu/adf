@@ -1,0 +1,75 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "gattusADF"
+		},
+		"AzureGen2_accountKey": {
+			"value": ""
+		},
+		"AzureSql_password": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_password": {
+			"value": ""
+		},
+		"PostgreSql1_password": {
+			"value": ""
+		},
+		"Validation_accountKey": {
+			"value": ""
+		},
+		"lnk_Adls_accountKey": {
+			"value": ""
+		},
+		"ls_prod_mis_password": {
+			"value": ""
+		},
+		"AzureGen2_properties_typeProperties_url": {
+			"value": "https://varungattu.dfs.core.windows.net/"
+		},
+		"AzureSql_properties_typeProperties_server": {
+			"value": "varun.database.windows.net"
+		},
+		"AzureSql_properties_typeProperties_database": {
+			"value": "jishnu"
+		},
+		"AzureSql_properties_typeProperties_userName": {
+			"value": "jishnu"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "db-server-jishnu.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "db_jishnu"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "pa"
+		},
+		"PostgreSql1_properties_typeProperties_server": {
+			"value": "127.0.0.1"
+		},
+		"PostgreSql1_properties_typeProperties_database": {
+			"value": "prod"
+		},
+		"PostgreSql1_properties_typeProperties_username": {
+			"value": "postgres"
+		},
+		"Validation_properties_typeProperties_url": {
+			"value": "https://varungattu.dfs.core.windows.net/"
+		},
+		"lnk_Adls_properties_typeProperties_url": {
+			"value": "https://varundev.dfs.core.windows.net/"
+		},
+		"ls_prod_mis_properties_typeProperties_server": {
+			"value": "db-server-jishnu.database.windows.net"
+		},
+		"ls_prod_mis_properties_typeProperties_database": {
+			"value": "mis"
+		},
+		"ls_prod_mis_properties_typeProperties_userName": {
+			"value": "pa"
+		}
+	}
+}

@@ -1,0 +1,236 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "gattusADF"
+		},
+		"AzureGen2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureGen2'"
+		},
+		"AzureSql_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSql'"
+		},
+		"AzureSqlDatabase1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase1'"
+		},
+		"PostgreSql1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'PostgreSql1'"
+		},
+		"Validation_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'Validation'"
+		},
+		"lnk_Adls_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'lnk_Adls'"
+		},
+		"ls_prod_mis_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_prod_mis'"
+		},
+		"AzureGen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://varungattu.dfs.core.windows.net/"
+		},
+		"AzureSql_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "varun.database.windows.net"
+		},
+		"AzureSql_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "jishnu"
+		},
+		"AzureSql_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "jishnu"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "db-server-jishnu.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "db_jishnu"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "pa"
+		},
+		"PostgreSql1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "127.0.0.1"
+		},
+		"PostgreSql1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "prod"
+		},
+		"PostgreSql1_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "postgres"
+		},
+		"Validation_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://varungattu.dfs.core.windows.net/"
+		},
+		"lnk_Adls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://varundev.dfs.core.windows.net/"
+		},
+		"ls_prod_mis_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "db-server-jishnu.database.windows.net"
+		},
+		"ls_prod_mis_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "mis"
+		},
+		"ls_prod_mis_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "pa"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "gattusADF_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureGen2_accountKey": {
+						"value": "[parameters('AzureGen2_accountKey')]"
+					},
+					"AzureSql_password": {
+						"value": "[parameters('AzureSql_password')]"
+					},
+					"AzureSqlDatabase1_password": {
+						"value": "[parameters('AzureSqlDatabase1_password')]"
+					},
+					"Validation_accountKey": {
+						"value": "[parameters('Validation_accountKey')]"
+					},
+					"lnk_Adls_accountKey": {
+						"value": "[parameters('lnk_Adls_accountKey')]"
+					},
+					"ls_prod_mis_password": {
+						"value": "[parameters('ls_prod_mis_password')]"
+					},
+					"AzureGen2_properties_typeProperties_url": {
+						"value": "[parameters('AzureGen2_properties_typeProperties_url')]"
+					},
+					"AzureSql_properties_typeProperties_server": {
+						"value": "[parameters('AzureSql_properties_typeProperties_server')]"
+					},
+					"AzureSql_properties_typeProperties_database": {
+						"value": "[parameters('AzureSql_properties_typeProperties_database')]"
+					},
+					"AzureSql_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSql_properties_typeProperties_userName')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_userName')]"
+					},
+					"Validation_properties_typeProperties_url": {
+						"value": "[parameters('Validation_properties_typeProperties_url')]"
+					},
+					"lnk_Adls_properties_typeProperties_url": {
+						"value": "[parameters('lnk_Adls_properties_typeProperties_url')]"
+					},
+					"ls_prod_mis_properties_typeProperties_server": {
+						"value": "[parameters('ls_prod_mis_properties_typeProperties_server')]"
+					},
+					"ls_prod_mis_properties_typeProperties_database": {
+						"value": "[parameters('ls_prod_mis_properties_typeProperties_database')]"
+					},
+					"ls_prod_mis_properties_typeProperties_userName": {
+						"value": "[parameters('ls_prod_mis_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "gattusADF_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'gattusADF_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "gattusADF_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"PostgreSql1_password": {
+						"value": "[parameters('PostgreSql1_password')]"
+					},
+					"PostgreSql1_properties_typeProperties_server": {
+						"value": "[parameters('PostgreSql1_properties_typeProperties_server')]"
+					},
+					"PostgreSql1_properties_typeProperties_database": {
+						"value": "[parameters('PostgreSql1_properties_typeProperties_database')]"
+					},
+					"PostgreSql1_properties_typeProperties_username": {
+						"value": "[parameters('PostgreSql1_properties_typeProperties_username')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'gattusADF_ArmTemplate_1')]"
+			]
+		}
+	]
+}
