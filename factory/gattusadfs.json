@@ -1,0 +1,9 @@
+{
+	"name": "gattusadfs",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "1aaeb6d2-d8b9-4c50-92e0-5e71a2b0674b",
+		"tenantId": "7dcef4ec-334c-4de9-a03a-81d11b2291a3"
+	}
+}
