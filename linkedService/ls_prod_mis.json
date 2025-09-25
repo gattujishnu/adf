@@ -6,12 +6,12 @@
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
 			"server": "jishnudf.database.windows.net",
-			"database": "gattuADF",
+			"database": "gattusADF",
 			"encrypt": "mandatory",
 			"trustServerCertificate": false,
 			"authenticationType": "SQL",
 			"userName": "jishnu",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEJCRDY5Nzc5LUVEOTgtNEQwOC04REI0LTJGODVGNzJBMTcwMl82OGVhMjJiNC05NjA4LTQ5MDctYjU4YS1lNGU5MDMyYTEwODMiDQp9"
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEJCRDY5Nzc5LUVEOTgtNEQwOC04REI0LTJGODVGNzJBMTcwMl9jOWMwN2NkOS1jYjYyLTRlNWMtYmY2Zi0zOWZkNmZjZTM0ODYiDQp9"
 		}
 	}
 }
